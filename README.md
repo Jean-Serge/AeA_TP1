@@ -52,3 +52,15 @@ Travail réalisé :
 + Lecture d'un brin dans un fichier fasta
 + Recherche d'une chaîne de nucléotides donnée dans un brin (retour des occurences
 sous forme d'une liste d'indices)
++ Calcul des différentes versions d'une chaîne (reverse, complementaire, ...)
+
+TODO :
+------
+- Écrire fonction permettant de calcul chaque séquence de taille N et de rechercher 
+leurs occurences
+- Modifier le Main pour être capable de lire les options (taille, booléens et 
+fichier) de la recherche
+- Fusionner dans la recherche les résultats en fonction des booléens (si réverse est
+à true, les résultats d'un mot et de son réverse devront être fusionnés) 
+- Tester l'ensemble du programme
+- Commencer l'implémentation d'un autre algorithme de recherche
