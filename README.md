@@ -38,6 +38,12 @@ Implémentation :
 Nous allons implémenter différents algorithme de recherche de motif 
 afin de constater leur efficacité à chacun.
 
+Les résultats d'une recherche de motif seront stockés dans une liste 
+d'entiers représentant les occurences de la chaîne.
+Les résultats d'une recherche complète seront stockés dans une Map 
+dont la clé sera un motif et dont les valeurs seront des listes
+d'entiers.
+
 
 Implémentation 1:
 -----------------
@@ -60,15 +66,25 @@ Travail réalisé :
 + Recherche d'une chaîne de nucléotides donnée dans un brin (retour des occurences
 sous forme d'une liste d'indices)
 + Calcul des différentes versions d'une chaîne (reverse, complementaire, ...)
++ Modifier le Main pour être capable de lire les options (taille, booléens et 
+fichier) de la recherche
 
 TODO :
 ------
 + Écrire fonction permettant de calcul chaque séquence de taille N et de rechercher 
-leurs occurences
-+ Modifier le Main pour être capable de lire les options (taille, booléens et 
-fichier) de la recherche
+leurs occurencesi (voir notes)
 + Fusionner dans la recherche les résultats en fonction des booléens (si réverse est
 à true, les résultats d'un mot et de son réverse devront être fusionnés) 
 + Tester l'ensemble du programme
 + Commencer l'implémentation d'un autre algorithme de recherche
 + Implémenter l'écriture des résultats dans un fichier dotplot
+
+Notes :
+-------
+La fonction de recherche globale commencera par un parcours du brin en ajoutant chaque 
+motif différents composés de N nucléotides dans une Map (avec une liste vide).
+Il suffira ensuite de parcourir la liste des clés et de rechercher chaque motif en 
+ajoutant le résultat de la recherche comme valeur de la Map.
+A la fin de la recherche complète, il faudra également, en fonction des options de
+recherche, fusionner les valeurs des clés complémentaires/inverses/...
+
