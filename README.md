@@ -12,6 +12,13 @@ Compléter avec le fonctionnement du programme :
 + commandes pour lancer le programmes
 + commandes pour exécuter les tests
 
+Le programme attend comme paramètres : 
++ Le chemin vers un fichier .fasta
++ Un entier N
++ 3 paramètres (facultatifs) indiquant les options de 
+recherche
+
+
 Fonctionnalités :
 =================
 
@@ -56,11 +63,12 @@ sous forme d'une liste d'indices)
 
 TODO :
 ------
-- Écrire fonction permettant de calcul chaque séquence de taille N et de rechercher 
++ Écrire fonction permettant de calcul chaque séquence de taille N et de rechercher 
 leurs occurences
-- Modifier le Main pour être capable de lire les options (taille, booléens et 
++ Modifier le Main pour être capable de lire les options (taille, booléens et 
 fichier) de la recherche
-- Fusionner dans la recherche les résultats en fonction des booléens (si réverse est
++ Fusionner dans la recherche les résultats en fonction des booléens (si réverse est
 à true, les résultats d'un mot et de son réverse devront être fusionnés) 
-- Tester l'ensemble du programme
-- Commencer l'implémentation d'un autre algorithme de recherche
++ Tester l'ensemble du programme
++ Commencer l'implémentation d'un autre algorithme de recherche
++ Implémenter l'écriture des résultats dans un fichier dotplot
