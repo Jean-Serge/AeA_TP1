@@ -1,4 +1,4 @@
-package tests;
+package entite;
 
 import junit.framework.*;
 import org.junit.Test;
