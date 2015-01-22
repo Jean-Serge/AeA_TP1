@@ -66,7 +66,7 @@ public class Main {
 
 		// On instancie la recherche voulue
 		Brin b = new Brin(path);
-		Recherche recherche = new RechercheNaive(b, N, reverse, comp, revComp);
+		Recherche recherche = new RechercheNaive(b.getSequence(), N, reverse, comp, revComp);
 		System.out.println(recherche);
 
 		recherche.rechercheComplete();

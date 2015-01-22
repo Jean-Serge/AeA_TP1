@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import entite.Brin;
-
 /**
  * Classe abstraite représentant une recherche de motif. Cette classe permet de
  * factoriser l'implémentation de plusieurs algorithmes de recherche.
@@ -21,7 +19,7 @@ import entite.Brin;
  */
 public abstract class Recherche {
 
-	protected Brin b;
+	protected String sequence;
 	protected int N;
 	protected boolean r, c, rc; // Options de recherche
 	protected Map<String, List<Integer>> resultats;
@@ -38,10 +36,10 @@ public abstract class Recherche {
 	 * @param comp
 	 * @param revComp
 	 */
-	public Recherche(Brin b, int n, boolean reverse, boolean comp,
+	public Recherche(String s, int n, boolean reverse, boolean comp,
 			boolean revComp) {
 		this.N = n;
-		this.b = b;
+		this.sequence = s;
 		this.r = reverse;
 		this.rc = revComp;
 		this.c = comp;
@@ -57,8 +55,8 @@ public abstract class Recherche {
 		String motif;
 		
 		// Ajout chaque chaîne de N caractère de la séquence dans la Map
-		for(int i = 0 ; i < this.b.SizeofSequence() - N ; i++){
-			motif = b.getSequence().substring(i, i+N);
+		for(int i = 0 ; i < this.sequence.length() - N ; i++){
+			motif = sequence.substring(i, i+N);
 			this.resultats.put(motif, new ArrayList<Integer>());
 		}
 	}
@@ -89,7 +87,7 @@ public abstract class Recherche {
 
 	public String toString() {
 		String retour = "";
-		retour += "Séquence : " + b.getSequence();
+		retour += "Séquence : " + sequence;
 		retour += "\nOptions : \nr = " + r + "\nc = " + c + "\nrc = " + rc;
 		retour += "\nN = " + N;
 		return retour;
