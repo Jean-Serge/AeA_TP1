@@ -68,11 +68,11 @@ sous forme d'une liste d'indices)
 + Calcul des différentes versions d'une chaîne (reverse, complementaire, ...)
 + Modifier le Main pour être capable de lire les options (taille, booléens et 
 fichier) de la recherche
++ Écrire fonction permettant de calcul chaque séquence de taille N et de rechercher 
+leurs occurences (voir notes)
 
 TODO :
 ------
-+ Écrire fonction permettant de calcul chaque séquence de taille N et de rechercher 
-leurs occurencesi (voir notes)
 + Fusionner dans la recherche les résultats en fonction des booléens (si réverse est
 à true, les résultats d'un mot et de son réverse devront être fusionnés) 
 + Tester l'ensemble du programme
