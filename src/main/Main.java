@@ -35,7 +35,7 @@ public class Main {
 							+ " est invalide.");
 					break;
 				}
-			} else if (Tools.isNumber(args[i])) {
+			} else if (Tools.isInteger(args[i])) {
 				// On a trouvé un N
 				N = Integer.parseInt(args[i]);
 				if (N <= 0) {
