@@ -61,9 +61,21 @@ public abstract class Recherche {
 			motif = b.getSequence().substring(i, i+N);
 			this.resultats.put(motif, new ArrayList<Integer>());
 		}
+	}
+	
+	/**
+	 * Effectue une recherche de chaque motif de la Map dans le texte
+	 * et met à jour la liste d'occurence correspondante.
+	 */
+	public void rechercheComplete(){
+		this.initMap();
 		
-//		for(String s : this.resultats.keySet())
-//			System.out.println(s);
+		for(String s: this.resultats.keySet()){
+			this.resultats.put(s, chercherMotif(s));
+		}
+		
+		for(String s : this.resultats.keySet())
+			System.out.println(s + " : " + this.resultats.get(s));
 	}
 	
 	/**
