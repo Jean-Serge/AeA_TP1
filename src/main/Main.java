@@ -72,10 +72,9 @@ public class Main {
 		System.out.println(recherche);
 
 		recherche.rechercheComplete();
-		// List<Integer> liste = recherche.chercherMotif("AT", b);
-		// System.out.println(b.getSequence());
-		// System.out.println(liste);
-
+		
+//		for(String s : recherche.getResultats().keySet())
+//			System.out.println(s + " : " + recherche.getResultats().get(s));
 	}
 
 }
