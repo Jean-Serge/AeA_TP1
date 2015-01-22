@@ -1,7 +1,6 @@
 package entite;
 
-import junit.framework.*;
-
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import entite.Brin;
@@ -29,9 +28,9 @@ public class testBrin {
 		String SeqB2 = brintest2.getSequence();
 		
 		// Tests :
-		Assert.assertEquals("Le brin d'ADN 'test1.fasta' doit être 'GATACACA'.","GATACACA",SeqB1);
+		assertEquals("Le brin d'ADN 'test1.fasta' doit être 'GATACACA'.","GATACACA",SeqB1);
 		
-		Assert.assertEquals("Le brin d'ADN 'test2.fasta' doit être 'TATATATATATA'.","TATATATATATA",SeqB2);
+		assertEquals("Le brin d'ADN 'test2.fasta' doit être 'TATATATATATA'.","TATATATATATA",SeqB2);
 	}
 	
 	@Test 
@@ -41,9 +40,9 @@ public class testBrin {
 		int tailleB2 = brintest2.SizeofSequence();
 		
 		// Tests :
-		Assert.assertEquals("Le brin d'ADN 'test1.fasta' doit avoir une taille de 8 (GATACACA).",8,tailleB1);
+		assertEquals("Le brin d'ADN 'test1.fasta' doit avoir une taille de 8 (GATACACA).",8,tailleB1);
 		
-		Assert.assertEquals("Le brin d'ADN 'test2.fasta' doit avoir une taille de 12 (TATATATATATA).",12,tailleB2);
+		assertEquals("Le brin d'ADN 'test2.fasta' doit avoir une taille de 12 (TATATATATATA).",12,tailleB2);
 
 		
 	}
