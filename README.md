@@ -78,6 +78,7 @@ leurs occurencesi (voir notes)
 + Tester l'ensemble du programme
 + Commencer l'implémentation d'un autre algorithme de recherche
 + Implémenter l'écriture des résultats dans un fichier dotplot
++ Factoriser le code du Main (trop grand)
 
 Notes :
 -------
