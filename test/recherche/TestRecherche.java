@@ -10,6 +10,7 @@ import org.junit.Test;
 public class TestRecherche {
 
 	private Recherche r;
+	private Recherche rboyer;
 	
 	@Before
 	public void setUp(){
@@ -26,7 +27,21 @@ public class TestRecherche {
 	public void testInitMap(){
 		for(String s : r.getResultats().keySet()){
 			assertNotSame(new ArrayList<Integer>(), r.chercherMotif(s));
+			assertNotSame(new ArrayList<Integer>(), rboyer.chercherMotif(s));
 		}
+	}
+	
+	/**
+	 * Test de la fonction chercherMotif de BoyerMoore.
+	 * En toute logique les resultats doivent être les mêmes que la recherche dite naïve.
+	 */
+	@Test
+	public void testBoyer(){
+		rboyer = new RechercheBoyerMoore("TACTACTAAACGGATC", 2, true, false, false);
+		assertEquals(rboyer.chercherMotif("A"), r.chercherMotif("A"));
+		assertEquals(rboyer.chercherMotif("AGG"), r.chercherMotif("AGG"));
+		assertEquals(rboyer.chercherMotif("AC"), r.chercherMotif("AC"));
+
 	}
 	
 }

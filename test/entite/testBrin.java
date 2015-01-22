@@ -1,6 +1,10 @@
 package entite;
 
 import static org.junit.Assert.*;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9b8d2ed89c5a0b2fc153965882f664b400298997
 import org.junit.Before;
 import org.junit.Test;
 import entite.Brin;
