@@ -68,10 +68,11 @@ public class Main {
 		Brin b = new Brin(path);
 		Recherche recherche = new RechercheNaive(b, N, reverse, comp, revComp);
 		System.out.println(recherche);
-		
-//		List<Integer> liste = recherche.chercherMotif("AT", b);
-//		System.out.println(b.getSequence());
-//		System.out.println(liste);
+
+		recherche.initMap();
+		// List<Integer> liste = recherche.chercherMotif("AT", b);
+		// System.out.println(b.getSequence());
+		// System.out.println(liste);
 
 	}
 
