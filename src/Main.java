@@ -1,7 +1,5 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.List;
-
 import entite.Brin;
 import recherche.Recherche;
 import recherche.RechercheNaive;
@@ -12,7 +10,6 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
 		int N = -1;
 		boolean reverse, comp, revComp;
 		reverse = comp = revComp = false;
@@ -55,16 +52,19 @@ public class Main {
 			}
 		}
 
+		// On vérifie qu'un entier a été spécifié
 		if (N == -1) {
 			System.out
 					.println("Veuillez spécifier la longueur de la chaîne recherchée.");
 			System.exit(1);
 		}
+		// On vérifie qu'un chemin a été spécifié
 		if (path == null) {
 			System.out.println("Veuillez indiquer le fichier fasta à lire.");
 			System.exit(1);
 		}
 
+		// On instancie la recherche voulue
 		Brin b = new Brin(path);
 		Recherche recherche = new RechercheNaive(b, N, reverse, comp, revComp);
 		System.out.println(recherche);
