@@ -1,3 +1,4 @@
+package utils;
 /**
  * Classe proposant des fonctions statiques utilisable 
  * dans le projet.

@@ -1,8 +1,10 @@
+package main;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import entite.Brin;
 import recherche.Recherche;
 import recherche.RechercheNaive;
+import utils.Tools;
 
 public class Main {
 
