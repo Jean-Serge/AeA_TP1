@@ -2,6 +2,7 @@ package entite;
 
 import junit.framework.*;
 import org.junit.Test;
+import org.junit.Before;
 import entite.Motif;
 
 /**
@@ -11,8 +12,14 @@ import entite.Motif;
 public class testMotif {
 	
 	// On construit les motif pour les tests
-	Motif motiftest1 = new Motif("GAGATACA");
-	Motif motiftest2 = new Motif("CGTA");
+	private Motif motiftest1;
+	private Motif motiftest2;
+	
+	@Before
+	public void setUp(){
+		motiftest1 = new Motif("GAGATACA");
+		motiftest2 = new Motif("CGTA");	
+	}
 	
 	@Test
 	public void TestCharComplementary() {

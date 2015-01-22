@@ -1,6 +1,8 @@
 package entite;
 
 import junit.framework.*;
+
+import org.junit.Before;
 import org.junit.Test;
 import entite.Brin;
 
@@ -11,8 +13,14 @@ import entite.Brin;
 public class testBrin {
 	
 	// On construit les brins pour les tests
-	Brin brintest1 = new Brin("donnees/test1.fasta");
-	Brin brintest2 = new Brin("donnees/test2.fasta");
+	private Brin brintest1;
+	private Brin brintest2;
+	
+	@Before
+	public void setUp(){
+		brintest1 = new Brin("donnees/test1.fasta");
+		brintest2 = new Brin("donnees/test2.fasta");
+	}
 	
 	@Test
 	public void TestConstructeur() {
