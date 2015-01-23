@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import entite.Motif;
 
 /**
@@ -21,13 +19,13 @@ import entite.Motif;
  * 
  */
 public abstract class Recherche {
-
-	private List<String> dejaVu;
+	// ================================ Attributs =====================================
 	protected String sequence;
 	protected int N;
 	protected boolean r, c, rc; // Options de recherche
 	protected Map<String, List<Integer>> resultats;
 
+	// ============================== Initialisation ==================================
 	/**
 	 * Instancie une nouvelle recherche. Les booleen représente ici les options
 	 * de recherche (ex : complémentaire, reverse, ...)
@@ -49,9 +47,10 @@ public abstract class Recherche {
 		this.c = comp;
 		this.resultats = new HashMap<String, List<Integer>>();
 		this.initMap();
-		this.dejaVu = new ArrayList<String>();
+		new ArrayList<String>();
 	}
 
+	// ========================== Manipulation des Résultats ==========================
 	/**
 	 * Initialise la map en y ajoutant une clé pour chaque motif de taille N
 	 * trouvé en parcourant le texte. On suppose N < taille de la chaîne
@@ -66,6 +65,9 @@ public abstract class Recherche {
 		}
 	}
 
+	/**
+	 * Trie les entrées en fusionnant les résultats selon les options de recherche.
+	 */
 	public void trierEntrees() {
 		Motif mot;
 
@@ -82,6 +84,11 @@ public abstract class Recherche {
 		}
 	}
 
+	/**
+	 * Fusionne les résultats du motif m1 et ceux de m2 dans les résultats.
+	 * @param m1 la 1ère clé
+	 * @param m2 la 2e clé
+	 */
 	public void fusionnerEntrees(String m1, String m2) {
 		if(m1.equals(m2))
 			return;
@@ -99,26 +106,6 @@ public abstract class Recherche {
 
 		this.resultats.put(m1, nouvelle);
 		this.resultats.put(m2, nouvelle);
-	}
-
-	/**
-	 * Effectue une recherche de chaque motif de la Map dans le texte et met à
-	 * jour la liste d'occurence correspondante.
-	 */
-	public void rechercheComplete() {
-		for (String s : this.resultats.keySet()) {
-			this.resultats.put(s, chercherMotif(s));
-		}
-
-		// TODO à améliorer
-		this.creerEntreesManquantes();
-		this.creerEntreesManquantes();
-		this.creerEntreesManquantes();
-
-		this.trierEntrees();
-		
-		for (String s : resultats.keySet())
-			System.out.println(s + " : " + resultats.get(s));
 	}
 
 	private void creerEntreesManquantes() {
@@ -146,8 +133,22 @@ public abstract class Recherche {
 		}
 	}
 
-	public Map<String, List<Integer>> getResultats() {
-		return resultats;
+	// ================================= Recherche ====================================
+	/**
+	 * Effectue une recherche de chaque motif de la Map dans le texte et met à
+	 * jour la liste d'occurence correspondante.
+	 */
+	public void rechercheComplete() {
+		for (String s : this.resultats.keySet()) {
+			this.resultats.put(s, chercherMotif(s));
+		}
+
+		// TODO à améliorer
+		this.creerEntreesManquantes();
+		this.creerEntreesManquantes();
+		this.creerEntreesManquantes();
+
+		this.trierEntrees();
 	}
 
 	/**
@@ -158,6 +159,21 @@ public abstract class Recherche {
 	 * @return
 	 */
 	public abstract List<Integer> chercherMotif(String motif);
+	
+	/**
+	 * Traduit les résultats sous forme d'une chaîne de caractère.
+	 * @return une version texte des résultats
+	 */
+	public String getResultatsAsString(){
+		String retour = "";
+		for (String s : resultats.keySet())
+			retour += s + " : " + resultats.get(s) + "\n";
+		return retour;
+	}
+
+	public Map<String, List<Integer>> getResultats() {
+		return resultats;
+	}
 
 	public String toString() {
 		String retour = "";
