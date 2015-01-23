@@ -1,4 +1,5 @@
 package main;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import entite.Brin;
@@ -6,21 +7,24 @@ import recherche.Recherche;
 import recherche.RechercheBoyerMoore;
 import recherche.RechercheNaive;
 import utils.Tools;
-import utils.DotPlotWriter;
 
 public class Main {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+	// TODO affiche les différentes options prises en charge par le programme.
+	public static void usage() {
+
+	}
+
+	public static Recherche parseArgs(String[] args) {
 		int N = -1;
 		boolean reverse, comp, revComp;
 		reverse = comp = revComp = false;
-		String path = null;
+		String path = null, algo = null;
 
 		for (int i = 0; i < args.length; i++) {
-			if (args[i].startsWith("-")) {
+			if (args[i].startsWith("--")) {
+				algo = args[i];
+			} else if (args[i].startsWith("-")) {
 				// Options de recherche
 				switch (args[i]) {
 				case "-r":
@@ -70,18 +74,41 @@ public class Main {
 
 		// On instancie la recherche voulue
 		Brin b = new Brin(path);
-		Recherche recherche = new RechercheNaive(b.getSequence(), N, reverse, comp, revComp);
-		Recherche recherche2 = new RechercheBoyerMoore(b.getSequence(), N, reverse, comp, revComp);
+		if (null == algo)
+			return new RechercheBoyerMoore(b.getSequence(), N, reverse, comp,
+					revComp);
+		else {
+			switch (algo) {
+			case "--naif":
+				return new RechercheNaive(b.getSequence(), N, reverse, comp,
+						revComp);
+			case "--boyer-moore":
+				return new RechercheBoyerMoore(b.getSequence(), N, reverse, comp,
+						revComp);
+			default:
+				System.out.println("Veuillez spécifier un algorithme valide.");
+				System.exit(1);
+			}
+		}
+		return null;
+	}
 
-		recherche.rechercheComplete();
-		recherche2.rechercheComplete();
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Recherche r;
 		
-		DotPlotWriter dp = new DotPlotWriter("resultats.dotplot",recherche2.getResultats(),b.getSequence());
-		dp.printResults();
-		
-		//System.out.println(recherche.getResultatsAsString());
-		//System.out.println("\n\n==================================================================================================\n\n");
-		//System.out.println(recherche2.getResultatsAsString());
+		r = Main.parseArgs(args);
+		r.rechercheComplete();
+
+//		DotPlotWriter dp = new DotPlotWriter("resultats.dotplot",
+//				r.getResultats(), r.getSequence());
+//		dp.printResults();
+
+		 System.out.println(r.getResultatsAsString());
+		// System.out.println("\n\n==================================================================================================\n\n");
+		// System.out.println(recherche2.getResultatsAsString());
 	}
 
 }
