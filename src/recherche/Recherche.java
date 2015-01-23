@@ -182,4 +182,12 @@ public abstract class Recherche {
 		retour += "\nN = " + N;
 		return retour;
 	}
+	
+	public String getSequence() {
+		return this.sequence;
+	}
+	
+	public int getN() {
+		return this.N;
+	}
 }
