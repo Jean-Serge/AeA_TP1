@@ -3,7 +3,7 @@ package entite;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
-import entite.Motif;
+import entite.MotifGenome;
 
 /**
  *  Tests de création de motifs.
@@ -12,22 +12,22 @@ import entite.Motif;
 public class testMotif {
 	
 	// On construit les motif pour les tests
-	private Motif motiftest1;
-	private Motif motiftest2;
+	private MotifGenome motiftest1;
+	private MotifGenome motiftest2;
 	
 	@Before
 	public void setUp(){
-		motiftest1 = new Motif("GAGATACA");
-		motiftest2 = new Motif("CGTA");	
+		motiftest1 = new MotifGenome("GAGATACA");
+		motiftest2 = new MotifGenome("CGTA");	
 	}
 	
 	@Test
 	public void TestCharComplementary() {
 		// tests de la méthode CharComplementary
-		assertEquals("Le complémentaire de G est C.",'C',Motif.CharComplementary('G'));
-		assertEquals("Le complémentaire de C est G.",'G',Motif.CharComplementary('C'));
-		assertEquals("Le complémentaire de A est T.",'T',Motif.CharComplementary('A'));
-		assertEquals("Le complémentaire de T est A.",'A',Motif.CharComplementary('T'));
+		assertEquals("Le complémentaire de G est C.",'C',MotifGenome.CharComplementary('G'));
+		assertEquals("Le complémentaire de C est G.",'G',MotifGenome.CharComplementary('C'));
+		assertEquals("Le complémentaire de A est T.",'T',MotifGenome.CharComplementary('A'));
+		assertEquals("Le complémentaire de T est A.",'A',MotifGenome.CharComplementary('T'));
 	}
 	
 	@Test

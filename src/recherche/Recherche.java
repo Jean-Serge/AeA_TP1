@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import entite.Motif;
+import entite.MotifGenome;
 
 /**
  * Classe abstraite représentant une recherche de motif. Cette classe permet de
@@ -69,11 +69,11 @@ public abstract class Recherche {
 	 * Trie les entrées en fusionnant les résultats selon les options de recherche.
 	 */
 	public void trierEntrees() {
-		Motif mot;
+		MotifGenome mot;
 
 		// On fusionne les listes
 		for (String s : this.resultats.keySet()) {
-			mot = new Motif(s);
+			mot = new MotifGenome(s);
 
 			if (this.r)
 				fusionnerEntrees(mot.getMotif(), mot.Reverse().getMotif());
@@ -111,10 +111,10 @@ public abstract class Recherche {
 	private void creerEntreesManquantes() {
 		Map<String, List<Integer>> m = new HashMap<String, List<Integer>>(
 				this.resultats);
-		Motif mot;
+		MotifGenome mot;
 
 		for (String s : m.keySet()) {
-			mot = new Motif(s);
+			mot = new MotifGenome(s);
 			if (this.c
 					&& !this.resultats.containsKey(mot.Complementary()
 							.getMotif()))

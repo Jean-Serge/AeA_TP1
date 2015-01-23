@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import entite.Brin;
 import recherche.Recherche;
+import recherche.RechercheBoyerMoore;
 import recherche.RechercheNaive;
 import utils.Tools;
 
@@ -69,12 +70,14 @@ public class Main {
 		// On instancie la recherche voulue
 		Brin b = new Brin(path);
 		Recherche recherche = new RechercheNaive(b.getSequence(), N, reverse, comp, revComp);
-		System.out.println(recherche);
+		Recherche recherche2 = new RechercheBoyerMoore(b.getSequence(), N, reverse, comp, revComp);
 
 		recherche.rechercheComplete();
+		recherche2.rechercheComplete();
 		
-//		for(String s : recherche.getResultats().keySet())
-//			System.out.println(s + " : " + recherche.getResultats().get(s));
+		System.out.println(recherche.getResultatsAsString());
+		System.out.println("\n\n==================================================================================================\n\n");
+		System.out.println(recherche2.getResultatsAsString());
 	}
 
 }
