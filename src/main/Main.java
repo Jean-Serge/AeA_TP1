@@ -6,6 +6,7 @@ import recherche.Recherche;
 import recherche.RechercheBoyerMoore;
 import recherche.RechercheNaive;
 import utils.Tools;
+import utils.DotPlotWriter;
 
 public class Main {
 
@@ -75,9 +76,12 @@ public class Main {
 		recherche.rechercheComplete();
 		recherche2.rechercheComplete();
 		
-		System.out.println(recherche.getResultatsAsString());
-		System.out.println("\n\n==================================================================================================\n\n");
-		System.out.println(recherche2.getResultatsAsString());
+		DotPlotWriter dp = new DotPlotWriter("resultats.dotplot",recherche2.getResultats(),b.getSequence());
+		dp.printResults();
+		
+		//System.out.println(recherche.getResultatsAsString());
+		//System.out.println("\n\n==================================================================================================\n\n");
+		//System.out.println(recherche2.getResultatsAsString());
 	}
 
 }
