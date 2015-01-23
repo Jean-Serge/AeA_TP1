@@ -41,17 +41,15 @@ public class DotPlotWriter {
 	 * 
 	 */
 	public void printResults() {
-		out.println("x=[0.."+(this.sequence.length()-1)+"]");
-		out.println("y=[0.."+(this.sequence.length()-1)+"]");
 		for (String s : this.results.keySet()) {
 			List<Integer> list = this.results.get(s);
-			for (int i = 0; i < list.size(); i++) {
-				for (int j = 0; j < list.size(); j++) {
-					out.println("plot("+i+","+j+",'pb')");
+			for (Integer i : list) {
+				for (Integer j : list) {
+					out.println(i+" "+j);
 				}
 			}
 		}
-		out.println("text(x,y)");
 		out.close() ;
 	}
+	
 }
