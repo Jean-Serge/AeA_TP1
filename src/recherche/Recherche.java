@@ -186,4 +186,8 @@ public abstract class Recherche {
 	public String getSequence() {
 		return this.sequence;
 	}
+	
+	public int getN() {
+		return this.N;
+	}
 }
