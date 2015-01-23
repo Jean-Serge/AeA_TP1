@@ -8,26 +8,24 @@ import java.util.List;
 
 public class DotPlotWriter {
 	
+	private PrintWriter out;
+	private List<Integer> results;
+	
+	
 	public DotPlotWriter(String file,List<Integer> result) {
 
 		try {
-			
 			File fichier = new File(file) ;
-			PrintWriter out;
-			out = new PrintWriter(new FileWriter(fichier+".dotplot"));
-			out.write("Test") ;
-			out.println() ;
-			out.write("Dotplot") ;
-			out.close() ; //Ferme le flux du fichier
-			
+			this.out = new PrintWriter(new FileWriter(fichier));			
 		}
 		catch (IOException e) {
-			
 			e.printStackTrace();
-			
 		}
 
 	}
 	
-	
+	public void printResults() {
+		// blabla
+		out.close() ;
+	}
 }
