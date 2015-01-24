@@ -8,29 +8,31 @@ import java.util.List;
 
 import recherche.Recherche;
 
-/**
+/** Classe permettant la création d'un fichier txt contenant les resultats d'une recherche
+ * et d'un fichier .plot permettant la création d'un graphique gnuplot.
  * @author monbailly
  * @author verbaere
  *
  */
 public class DotPlotWriter {
 	
-	private PrintWriter out;
-	private PrintWriter plot;
+	private PrintWriter out; // PrintWriter du fichier txt
+	private PrintWriter plot; // PrintWriter du fichier plot
 	private Recherche recherche;
 	private String path;
 	
 	
-	/**
-	 * @param file
-	 * @param result
+	/** Contructeur du Créateur de fichier de resultats.
+	 * @param file le nom des fichiers a créer
+	 * @param result la recherche dont on veut exploter les resultats
 	 */
 	public DotPlotWriter(String file, Recherche r) {
 
 		try {
+			// On tente d'ouvrir un fichier texte
 			File fichier = new File(file+".txt") ;
 			this.out = new PrintWriter(new FileWriter(fichier));
-			
+			// On tente d'ouvrir un fichier plot
 			File fichier2 = new File(file+".plot") ;
 			this.plot = new PrintWriter(new FileWriter(fichier2));
 			
@@ -44,9 +46,11 @@ public class DotPlotWriter {
 	}
 	
 	/**
-	 * 
+	 * Impression des resultats dans les fichiers plot et txt.
 	 */
 	public void printResults() {
+		// Pour chaque valeur stockée dans la liste des résultats on créé une ligne 
+		// avec abscisses ordonnées dans le fichier txt
 		for (String s : this.recherche.getResultats().keySet()) {
 			List<Integer> list = this.recherche.getResultats().get(s);
 			for (Integer i : list) {
@@ -56,10 +60,14 @@ public class DotPlotWriter {
 				}
 			}
 		}
+		// On écrit le fichier plot associé
 		this.printPlot();
 		out.close() ;
 	}
 	
+	/**
+	 * Création d'un fichier pour gnuplot pour tracer un grapique
+	 */
 	public void printPlot() {
 		plot.println("set term png;");
 		
