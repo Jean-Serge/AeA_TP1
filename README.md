@@ -56,6 +56,22 @@ L'implémentation de cet algorithme simple nous permet de disposer d'un programm
 fonctionnel assez rapidement. Cela nous permet également de vérifier efficacement
 le résultat d'algorithmes plus complexes par la suite.
 
+Implémentation 2:
+-----------------
+Cette deuxième implémentation est réalisée en utilisant l'algorithme de Boyer-Moore.
+Cet algorithme se fait en deux étapes distinctes :
+- On traite le motif et on créé une matrice de bon-suffix. C'est elle qui va determiner
+le nombre de lettres à shifter.
+Pour remplir la table et pour un motif de taille n, on procède pour chaque indice de 0 à n-1 de telle façon :
+La case d'indice x contient l'intervalle entre le mot [x-1,n] et la première occurence
+y de ce même mot (on prend l'occurence la plus proche du mot). Si les caractères y+1 et x sont identiques alors on passe à l'occurence suivante...
+
+- Ensuite on parcourt la séquence et commençant par l'indice n-1. On vérifie les correspondances de chaque caractère de droite à gauche.
+Dès que les caractères ne correspondent pas alors on shift la tête de lecture de la valeur contenue dans la matrice des bons suffixes à l'indice correspondant.
+On fait l'opération tant qu'on est pas à la fin de la séquence.
+
+Cette algorithme a une compléxité dans le pire des cas en O(n x m). En moyenne, c'est
+l'algorithme le plus rapide. On peut en effet shifter la tête de lecture assez rapidement dans de "bonnes conditions".
 
 Etat du travail :
 =================
@@ -64,7 +80,7 @@ Travail réalisé :
 -----------------
 + Lecture d'un brin dans un fichier fasta
 + Recherche d'une chaîne de nucléotides donnée dans un brin (retour des occurences
-sous forme d'une liste d'indices)
+sous forme d'une liste d'indices) : Algo Naïf et Boyer-Moore.
 + Calcul des différentes versions d'une chaîne (reverse, complementaire, ...)
 + Modifier le Main pour être capable de lire les options (taille, booléens et 
 fichier) de la recherche
@@ -72,12 +88,12 @@ fichier) de la recherche
 leurs occurences (voir notes)
 + Fusionner dans la recherche les résultats en fonction des booléens (si réverse est
 à true, les résultats d'un mot et de son réverse devront être fusionnés) 
++ Ecrire les résultats dans un fichier dotplot
 
 TODO :
 ------
 + Tester l'ensemble du programme
 + Commencer l'implémentation d'un autre algorithme de recherche
-+ Implémenter l'écriture des résultats dans un fichier dotplot
 + Factoriser le code du Main (trop grand)
 
 Notes :
