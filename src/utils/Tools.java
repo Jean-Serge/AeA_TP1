@@ -1,4 +1,7 @@
 package utils;
+
+import java.util.Random;
+
 /**
  * Classe proposant des fonctions statiques utilisable 
  * dans le projet.
@@ -24,5 +27,40 @@ public class Tools {
 				return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * Cette fonction permet de créer un motif de taille et valeur aléatoires.
+	 * @return le motif aléatoire crée
+	 */
+	public static String motifAlea() {
+		// On créé une taille comprise entre 1 et 20.
+		Random rand = new Random();
+		int lenght = rand.nextInt(19)+1;
+		
+		String motif = "";
+		
+		// Pour chaque lettre du motif on ajoute un nucléotide au hasard.
+		for (int i=0; i<lenght; i++) {
+			int letter = lenght%4;
+			motif += int2Nucleo(letter);
+		}
+		
+		return motif;
+	}
+
+	/**
+	 * Cette fonction convertie un entier passé en paramètre en nucléotide (G,C,A ou T).
+	 * @param letter l'indice du nucléotide
+	 * @return le nucléotide indicé par l'entier entré en paramètre
+	 */
+	private static String int2Nucleo(int letter) {
+		switch (letter) {
+			case 0: return "A";
+			case 1: return "T";
+			case 2: return "G";
+			case 3: return "C";
+			default: return "";
+		}
 	}
 }

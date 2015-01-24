@@ -39,35 +39,58 @@ public class RechercheBoyerMoore extends Recherche {
 	 * Remplie la table des bons suffixes selon la méthode Boyer-Moore.
 	 * @param motif le motif sous forme de chaine de caractères
 	 */
-	public void remplirBonSuffix(String motif) {
-		int sizeM = motif.length();
+	public void remplirBonSuffix(String mot) {
+		String motif = "";
+		int sizeM = mot.length();
+		boolean drapeau = true;
+		
+		// On ajoute de D avant le motif pour être tranquille lors de nos comparaisons en début de motif
+		for (int x=0; x < sizeM-1; x++)
+			motif += "D";
+		motif += mot;
 		
 		// Initialisation :
 		this.BonSuffix = new int[sizeM];
 		this.BonSuffix[sizeM-1] = 1;
-		this.BonSuffix[0] = sizeM;
 		
-		// On ajoute les valeurs situées entre l'indice 1 et sizeM-2 de droite à gauche :
-		for (int i = sizeM-2; i > 0; i--) {
+		// On ajoute les valeurs situées entre l'indice 0 et sizeM-2 de droite à gauche :
+		for (int i = sizeM-2; i >= 0; i--) {
 			// u = le mot a chercher :
-			String u = motif.substring(i+1);
-			// index = la premiere occurence de u dans le mot (cad l'occurence la plus à droite) :
-			int index = motif.lastIndexOf(u,sizeM-2)+u.length()-1;
-			// le "mauvais suffixe" :
-			String suf = motif.substring(i,sizeM);
+			String u = motif.substring(i+sizeM);
 			
+			
+			// index = la premiere occurence de u dans le mot (cad l'occurence la plus à droite) :
+			int index = motif.lastIndexOf(u,motif.length()-1);
+			// le "mauvais suffixe" :
+			String suf = motif.substring(i+sizeM-1,2*(sizeM)-1);
+
 			// tant que l'on croise un mauvais suffixe alors on recalcule l'index de la prochaine occurence de u.
-			while (index != -1 && motif.substring(0,index+1).endsWith(suf)) {	
-				index = motif.lastIndexOf(u,index-suf.length());
-				// si l'on trouve une occurence il faut rajouter la longueur du mot - 1 pour calculer l'index dans le mot
-				if (index != -1)
+			while (index != -1 && drapeau) {
+				
+				if (index != -1 && !motif.substring(index-1,index+u.length()).endsWith(suf)) {
 					index += u.length()-1;
+					drapeau = false;
+					// Si l'on croise une occurence alors on met a jour l'index et on change le drapeau
+				}
+
+				if (drapeau) {
+					index = motif.lastIndexOf(u,index-1);
+				}
 			}
+			drapeau = true;
 			// Pour finir on ecrit la valeur de BonSuffix :
-			if (index == -1)
-				this.BonSuffix[i] = sizeM;
+			if (index == -1) {
+				int retranchement = sizeM-1;
+				// Si on trouve pas d'occurence, on fait attention de ne pas oublier que le motif peut avoir des bords !
+				while (retranchement > 0 && !mot.substring(0,retranchement).equals(mot.substring(sizeM-retranchement,sizeM))) {
+					retranchement--;
+				}
+				//System.out.println("ret :"+retranchement);
+				this.BonSuffix[i] = sizeM-retranchement;
+			}
 			else {
-				this.BonSuffix[i] = sizeM-1-index;
+				//System.out.println("bon suffixe : "+((motif.length())-index-1));
+				this.BonSuffix[i] = motif.length()-index-1;
 			}
 		}
 	}
@@ -108,10 +131,10 @@ public class RechercheBoyerMoore extends Recherche {
 			if (drapeau) {
 				/* Si drapeau est toujours vrai, c'est que l'on a trouvé une occurence de motif :
 				 - On ajoute l'indice du mot dans la liste des resultats
-				 - On calcule le nouvel indice de départ
+				 - On calcule le nouvel indice de départ = +1
 				 */
-				depart += sizeM;
-				occ.add(depart-i-sizeM+1);
+				depart += 1;
+				occ.add(depart-sizeM);
 			}
 			else {
 				// Sinon il faut recalculer l'indice avec la table BonSuffix
