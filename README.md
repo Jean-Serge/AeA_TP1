@@ -70,7 +70,7 @@ y de ce même mot (on prend l'occurence la plus proche du mot). Si les caractèr
 Dès que les caractères ne correspondent pas alors on shift la tête de lecture de la valeur contenue dans la matrice des bons suffixes à l'indice correspondant.
 On fait l'opération tant qu'on est pas à la fin de la séquence.
 
-Cette algorithme a une compléxité dans le pire des cas en O(n x m). En moyenne, c'est
+Cet algorithme a une compléxité dans le pire des cas en O(n x m). En moyenne, c'est
 l'algorithme le plus rapide. On peut en effet shifter la tête de lecture assez rapidement dans de "bonnes conditions".
 
 Etat du travail :

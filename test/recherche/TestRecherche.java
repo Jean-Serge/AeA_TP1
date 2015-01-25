@@ -76,7 +76,7 @@ public class TestRecherche {
 		Random rand = new Random();
 		
 		for (int i=0; i< 1000; i++) {
-			int entier = rand.nextInt(19)+1;
+			int entier = rand.nextInt(20)+1;
 			
 			Recherche rboyer1 = new RechercheBoyerMoore(sequence, entier, true, false, false);
 			Recherche rboyer2 = new RechercheBoyerMoore(sequence, entier, false, false, false);
@@ -97,10 +97,10 @@ public class TestRecherche {
 			rboyer4.rechercheComplete();
 			rnaive4.rechercheComplete();
 			
-			//assertEquals(rboyer1.resultats,rnaive1.resultats);
-			assertEquals(rboyer2.resultats,rnaive2.resultats);
-			//assertEquals(rboyer3.resultats,rnaive3.resultats);
-			//assertEquals(rboyer4.resultats,rnaive4.resultats);
+			//assertEquals(rboyer1.resultats,rnaive1.resultats);    // resultats KO
+			assertEquals(rboyer2.resultats,rnaive2.resultats);    // resultats OK
+			//assertEquals(rboyer3.resultats,rnaive3.resultats);   // resultats KO
+			//assertEquals(rboyer4.resultats,rnaive4.resultats);  // resultats KO
 
 		}
 

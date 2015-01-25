@@ -42,7 +42,7 @@ public class Tools {
 		
 		// Pour chaque lettre du motif on ajoute un nucléotide au hasard.
 		for (int i=0; i<lenght; i++) {
-			int letter = lenght%4;
+			int letter = rand.nextInt(3);
 			motif += int2Nucleo(letter);
 		}
 		
