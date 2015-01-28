@@ -55,7 +55,6 @@ public class DotPlotWriter {
 			List<Integer> list = this.recherche.getResultats().get(s);
 			for (Integer i : list) {
 				for (Integer j : list) {
-					if(i == j)
 						out.println(i+" "+j);
 				}
 			}
