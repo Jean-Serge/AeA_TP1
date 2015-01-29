@@ -3,6 +3,7 @@ package recherche;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.Before;
@@ -51,23 +52,25 @@ public class TestRecherche {
 	 */
 	@Test
 	public void testInitMap() {
+		List<Integer> liste = new ArrayList<Integer>();
+		
 		for (String s : rnaive1.getResultats().keySet()) {
-			assertNotSame(new ArrayList<Integer>(), rboyer1.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rnaive1.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rboyer2.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rnaive2.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rboyer3.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rnaive3.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rboyer4.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rnaive4.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rboyer5.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rnaive5.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rboyer6.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rnaive6.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rboyer7.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rnaive7.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rboyer8.chercherMotif(s));
-			assertNotSame(new ArrayList<Integer>(), rnaive8.chercherMotif(s));
+			assertNotSame(liste, rboyer1.chercherMotif(s));
+			assertNotSame(liste, rnaive1.chercherMotif(s));
+			assertNotSame(liste, rboyer2.chercherMotif(s));
+			assertNotSame(liste, rnaive2.chercherMotif(s));
+			assertNotSame(liste, rboyer3.chercherMotif(s));
+			assertNotSame(liste, rnaive3.chercherMotif(s));
+			assertNotSame(liste, rboyer4.chercherMotif(s));
+			assertNotSame(liste, rnaive4.chercherMotif(s));
+			assertNotSame(liste, rboyer5.chercherMotif(s));
+			assertNotSame(liste, rnaive5.chercherMotif(s));
+			assertNotSame(liste, rboyer6.chercherMotif(s));
+			assertNotSame(liste, rnaive6.chercherMotif(s));
+			assertNotSame(liste, rboyer7.chercherMotif(s));
+			assertNotSame(liste, rnaive7.chercherMotif(s));
+			assertNotSame(liste, rboyer8.chercherMotif(s));
+			assertNotSame(liste, rnaive8.chercherMotif(s));
 		}
 	}
 
@@ -93,8 +96,6 @@ public class TestRecherche {
 	 */
 	@Test
 	public void testBoyerRechercheComplete() {
-		Random rand = new Random();
-
 		rboyer1.rechercheComplete();
 		rnaive1.rechercheComplete();
 		rboyer2.rechercheComplete();
