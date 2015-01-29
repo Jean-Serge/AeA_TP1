@@ -6,6 +6,7 @@ import entite.Brin;
 import recherche.Recherche;
 import recherche.RechercheBoyerMoore;
 import recherche.RechercheNaive;
+import utils.DotPlotWriter;
 import utils.Tools;
 
 public class Main {
@@ -98,15 +99,16 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Recherche r;
-		
 		r = Main.parseArgs(args);
+		
+		long debut = System.currentTimeMillis();
 		r.rechercheComplete();
+		long fin = System.currentTimeMillis();
+		System.out.println("La recherche a pris " + (fin-debut) + " millisecondes.");
+		DotPlotWriter dp = new DotPlotWriter("resultats.dotplot", r);
+		dp.printResults();
 
-//		DotPlotWriter dp = new DotPlotWriter("resultats.dotplot",
-//				r.getResultats(), r.getSequence());
-//		dp.printResults();
-
-		 System.out.println(r.getResultatsAsString());
+//		 System.out.println(r.getResultatsAsString());
 		// System.out.println("\n\n==================================================================================================\n\n");
 		// System.out.println(recherche2.getResultatsAsString());
 	}
