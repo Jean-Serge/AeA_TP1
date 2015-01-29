@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.sun.java.swing.plaf.motif.resources.motif;
+
 import entite.MotifGenome;
 
 /**
@@ -141,14 +144,20 @@ public abstract class Recherche {
 	public void rechercheComplete() {
 		for (String s : this.resultats.keySet()) {
 			this.resultats.put(s, chercherMotif(s));
+			if(this.c)
+				this.resultats.get(s).addAll(chercherMotif(new MotifGenome(s).Complementary().getMotif()));
+			if(this.r)
+				this.resultats.get(s).addAll(chercherMotif(new MotifGenome(s).Reverse().getMotif()));
+			if(this.rc)
+				this.resultats.get(s).addAll(chercherMotif(new MotifGenome(s).ReverseComplementary().getMotif()));
 		}
-
+		
 		// TODO à améliorer
-		this.creerEntreesManquantes();
-		this.creerEntreesManquantes();
-		this.creerEntreesManquantes();
-
-		this.trierEntrees();
+//		this.creerEntreesManquantes();
+//		this.creerEntreesManquantes();
+//		this.creerEntreesManquantes();
+//
+//		this.trierEntrees();
 	}
 
 	/**

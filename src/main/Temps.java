@@ -20,7 +20,7 @@ public class Temps {
 		String sequence = b.getSequence();
 		Random r = new Random();
 		int entier = r.nextInt(20) + 1;
-
+		entier = 20;
 		rboyer1 = new RechercheBoyerMoore(sequence, entier, false, false, false);
 		rboyer2 = new RechercheBoyerMoore(sequence, entier, false, false, true);
 		rboyer3 = new RechercheBoyerMoore(sequence, entier, false, true, false);
@@ -43,15 +43,18 @@ public class Temps {
 		
 		long tps_boyer, tps_naif;
 		debut = System.currentTimeMillis();
-		rboyer1.rechercheComplete();
+		rboyer4.rechercheComplete();
 		fin = System.currentTimeMillis();
 		tps_boyer = fin-debut;
 		
+		System.out.println("La recherche Boyer 1 a pris "+ tps_boyer +" ms.");
+		
 		debut = System.currentTimeMillis();
-		rnaive1.rechercheComplete();
+		rnaive4.rechercheComplete();
 		fin = System.currentTimeMillis();
 		tps_naif = fin-debut;
-		System.out.println("La recherche Boyer 1 a pris "+ tps_boyer +" ms contre " + tps_naif +" pour la recherche naïve.");
+		System.out.println("La recherche Naïve 1 a pris "+ tps_naif +" ms.");
+		System.out.println(rboyer4.getResultatsAsString());
 	}
 
 }
