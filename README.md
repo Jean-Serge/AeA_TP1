@@ -89,12 +89,14 @@ leurs occurences (voir notes)
 + Fusionner dans la recherche les résultats en fonction des booléens (si réverse est
 à true, les résultats d'un mot et de son réverse devront être fusionnés) 
 + Ecrire les résultats dans un fichier dotplot
++ Factoriser le code du Main (trop grand)
 
 TODO :
 ------
 + Tester l'ensemble du programme
 + Commencer l'implémentation d'un autre algorithme de recherche
-+ Factoriser le code du Main (trop grand)
++ Réduire la complexité des fonctions de la classe Recherche notamment
+la fusion des résultats selon les options.
 
 Notes :
 -------
