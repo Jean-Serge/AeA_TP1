@@ -32,9 +32,11 @@ public class Brin {
 			InputStreamReader ipsr=new InputStreamReader(ips);
 			BufferedReader br=new BufferedReader(ipsr);
 			// lecture de  l'entête = inutile.
-			ligne=br.readLine();
-			// lecture de la sequence ADN qui est sur une seule ligne.
-			ligne=br.readLine();
+			br.readLine();
+			String msg;
+			// lecture de la sequence ADN
+			while ((msg =br.readLine())!=null)
+				ligne+= msg;
 			br.close(); 
 		}		
 		catch (Exception e){
