@@ -12,13 +12,18 @@ import utils.Tools;
 public class Main {
 
 	/**
-	 * Affiche les différentes options prises en charge par le programme.
+	 * Affichage de l'usage du programme.
 	 */
 	public static void usage() {
 		System.out.println("usage :");
 		System.out.println("java Main path_fichier_fasta n [-r|-c|-rc]{0,1} [--boyer-moore|--naive]{0,1}");
 	}
 
+	/**
+	 * Traitement des différents paramètres.
+	 * @param args la liste des paramètres
+	 * @return La recherche correspondante aux paramètres
+	 */
 	public static Recherche parseArgs(String[] args) {
 		int N = -1;
 		boolean reverse, comp, revComp;
@@ -97,7 +102,7 @@ public class Main {
 		return null;
 	}
 
-	/**
+	/** Main du programme.
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -110,10 +115,6 @@ public class Main {
 		System.out.println("La recherche a pris " + (fin-debut) + " millisecondes.");
 		DotPlotWriter dp = new DotPlotWriter("resultats", r);
 		dp.printResults();
-
-//		 System.out.println(r.getResultatsAsString());
-		// System.out.println("\n\n==================================================================================================\n\n");
-		// System.out.println(recherche2.getResultatsAsString());
 	}
 
 }
