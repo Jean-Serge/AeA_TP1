@@ -11,9 +11,12 @@ import utils.Tools;
 
 public class Main {
 
-	// TODO affiche les différentes options prises en charge par le programme.
+	/**
+	 * Affiche les différentes options prises en charge par le programme.
+	 */
 	public static void usage() {
-
+		System.out.println("usage :");
+		System.out.println("java Main path_fichier_fasta n [-r|-c|-rc]{0,1} [--boyer-moore|--naive]{0,1}");
 	}
 
 	public static Recherche parseArgs(String[] args) {
@@ -105,7 +108,7 @@ public class Main {
 		r.rechercheComplete();
 		long fin = System.currentTimeMillis();
 		System.out.println("La recherche a pris " + (fin-debut) + " millisecondes.");
-		DotPlotWriter dp = new DotPlotWriter("resultats.dotplot", r);
+		DotPlotWriter dp = new DotPlotWriter("resultats", r);
 		dp.printResults();
 
 //		 System.out.println(r.getResultatsAsString());
