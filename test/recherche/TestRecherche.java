@@ -53,7 +53,7 @@ public class TestRecherche {
 	@Test
 	public void testInitMap() {
 		List<Integer> liste = new ArrayList<Integer>();
-		
+
 		for (String s : rnaive1.getResultats().keySet()) {
 			assertNotSame(liste, rboyer1.chercherMotif(s));
 			assertNotSame(liste, rnaive1.chercherMotif(s));
@@ -124,4 +124,5 @@ public class TestRecherche {
 		assertEquals(rboyer8.resultats, rnaive8.resultats); // resultats OK
 
 	}
+
 }
