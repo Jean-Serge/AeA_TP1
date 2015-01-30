@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.java.swing.plaf.motif.resources.motif;
-
 import entite.MotifGenome;
 
 /**
@@ -67,74 +65,18 @@ public abstract class Recherche {
 			this.resultats.put(motif, new ArrayList<Integer>());
 		}
 	}
-
+	
 	/**
-	 * Trie les entrées en fusionnant les résultats selon les options de recherche.
+	 * Traduit les résultats sous forme d'une chaîne de caractère.
+	 * @return une version texte des résultats
 	 */
-	public void trierEntrees() {
-		MotifGenome mot;
-
-		// On fusionne les listes
-		for (String s : this.resultats.keySet()) {
-			mot = new MotifGenome(s);
-
-			if (this.r)
-				fusionnerEntrees(mot.getMotif(), mot.Reverse().getMotif());
-			if (this.c)
-				fusionnerEntrees(mot.getMotif(), mot.Complementary().getMotif());
-			if (this.rc)
-				fusionnerEntrees(mot.getMotif(), mot.ReverseComplementary().getMotif());
-		}
+	public String getResultatsAsString(){
+		String retour = "";
+		for (String s : resultats.keySet())
+			retour += s + " : " + resultats.get(s) + "\n";
+		return retour;
 	}
 
-	/**
-	 * Fusionne les résultats du motif m1 et ceux de m2 dans les résultats.
-	 * @param m1 la 1ère clé
-	 * @param m2 la 2e clé
-	 */
-	public void fusionnerEntrees(String m1, String m2) {
-		if(m1.equals(m2))
-			return;
-		
-		List<Integer> nouvelle = new ArrayList<Integer>();
-
-		for(Integer i : this.resultats.get(m1)){
-			if(!nouvelle.contains(i))
-				nouvelle.add(i);
-		}
-		for(Integer i : this.resultats.get(m2)){
-			if(!nouvelle.contains(i))
-				nouvelle.add(i);
-		}
-
-		this.resultats.put(m1, nouvelle);
-		this.resultats.put(m2, nouvelle);
-	}
-
-	private void creerEntreesManquantes() {
-		Map<String, List<Integer>> m = new HashMap<String, List<Integer>>(
-				this.resultats);
-		MotifGenome mot;
-
-		for (String s : m.keySet()) {
-			mot = new MotifGenome(s);
-			if (this.c
-					&& !this.resultats.containsKey(mot.Complementary()
-							.getMotif()))
-				this.resultats.put(mot.Complementary().getMotif(),
-						new ArrayList<Integer>());
-
-			if (this.r && !this.resultats.containsKey(mot.Reverse().getMotif()))
-				this.resultats.put(mot.Reverse().getMotif(),
-						new ArrayList<Integer>());
-
-			if (this.rc
-					&& !this.resultats.containsKey(mot.ReverseComplementary()
-							.getMotif()))
-				this.resultats.put(mot.ReverseComplementary().getMotif(),
-						new ArrayList<Integer>());
-		}
-	}
 
 	// ================================= Recherche ====================================
 	/**
@@ -151,13 +93,6 @@ public abstract class Recherche {
 			if(this.rc)
 				this.resultats.get(s).addAll(chercherMotif(new MotifGenome(s).ReverseComplementary().getMotif()));
 		}
-		
-		// TODO à améliorer
-//		this.creerEntreesManquantes();
-//		this.creerEntreesManquantes();
-//		this.creerEntreesManquantes();
-//
-//		this.trierEntrees();
 	}
 
 	/**
@@ -169,21 +104,6 @@ public abstract class Recherche {
 	 */
 	public abstract List<Integer> chercherMotif(String motif);
 	
-	/**
-	 * Traduit les résultats sous forme d'une chaîne de caractère.
-	 * @return une version texte des résultats
-	 */
-	public String getResultatsAsString(){
-		String retour = "";
-		for (String s : resultats.keySet())
-			retour += s + " : " + resultats.get(s) + "\n";
-		return retour;
-	}
-
-	public Map<String, List<Integer>> getResultats() {
-		return resultats;
-	}
-
 	public String toString() {
 		String retour = "";
 		retour += "Séquence : " + sequence;
@@ -196,6 +116,10 @@ public abstract class Recherche {
 		return this.sequence;
 	}
 	
+	public Map<String, List<Integer>> getResultats() {
+		return resultats;
+	}
+
 	public int getN() {
 		return this.N;
 	}
