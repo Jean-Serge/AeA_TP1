@@ -18,7 +18,7 @@ import java.lang.String;
  */
 public class RechercheBoyerMoore extends Recherche {
 
-	protected int[] BonSuffix;
+	protected int[] BonSuffixe;
 	
 	/**
 	 * Instancie une nouvelle recherche. Les booleen représente ici les options
@@ -26,9 +26,9 @@ public class RechercheBoyerMoore extends Recherche {
 	 * 
 	 * @param b le brin à étudier sous forme de chaine de caractères
 	 * @param n la taille des motifs à rechercher
-	 * @param reverse booléen, vaut true si l'option 'reverse' doit être actif
-	 * @param comp booléen, vaut true si l'option 'complémentaire' doit être actif
-	 * @param revComp booléen, vaut true si l'option 'reverse-complementaire' doit être actif
+	 * @param reverse booléen, vaut true si l'option 'reverse' doit être active
+	 * @param comp booléen, vaut true si l'option 'complémentaire' doit être active
+	 * @param revComp booléen, vaut true si l'option 'reverse-complementaire' doit être active
 	 */
 	public RechercheBoyerMoore(String b, int n, boolean reverse, boolean comp,
 			boolean revComp) {
@@ -39,19 +39,19 @@ public class RechercheBoyerMoore extends Recherche {
 	 * Remplie la table des bons suffixes selon la méthode Boyer-Moore.
 	 * @param motif le motif sous forme de chaine de caractères
 	 */
-	public void remplirBonSuffix(String mot) {
+	public void remplirBonSuffixe(String mot) {
 		String motif = "";
 		int sizeM = mot.length();
 		boolean drapeau = true;
 		
-		// On ajoute de D avant le motif pour être tranquille lors de nos comparaisons en début de motif
+		// On ajoute des 'D' avant le motif pour être tranquille lors de nos comparaisons en début de motif
 		for (int x=0; x < sizeM-1; x++)
 			motif += "D";
 		motif += mot;
 		
 		// Initialisation :
-		this.BonSuffix = new int[sizeM];
-		this.BonSuffix[sizeM-1] = 1;
+		this.BonSuffixe = new int[sizeM];
+		this.BonSuffixe[sizeM-1] = 1;
 		
 		// On ajoute les valeurs situées entre l'indice 0 et sizeM-2 de droite à gauche :
 		for (int i = sizeM-2; i >= 0; i--) {
@@ -85,12 +85,10 @@ public class RechercheBoyerMoore extends Recherche {
 				while (retranchement > 0 && !mot.substring(0,retranchement).equals(mot.substring(sizeM-retranchement,sizeM))) {
 					retranchement--;
 				}
-				//System.out.println("ret :"+retranchement);
-				this.BonSuffix[i] = sizeM-retranchement;
+				this.BonSuffixe[i] = sizeM-retranchement;
 			}
 			else {
-				//System.out.println("bon suffixe : "+((motif.length())-index-1));
-				this.BonSuffix[i] = motif.length()-index-1;
+				this.BonSuffixe[i] = motif.length()-index-1;
 			}
 		}
 	}
@@ -112,7 +110,7 @@ public class RechercheBoyerMoore extends Recherche {
 		int i=0; // variable qui décrémentera l'indice 'depart' afin de comparer toutes les lettres du motifs
 
 		// On initialise la table 'GoodSuffix' :
-		this.remplirBonSuffix(motif);
+		this.remplirBonSuffixe(motif);
 		
 		//for (int j=0; j< sizeM; j++)
 		//	System.out.println(this.BonSuffix[j]);
@@ -138,7 +136,7 @@ public class RechercheBoyerMoore extends Recherche {
 			}
 			else {
 				// Sinon il faut recalculer l'indice avec la table BonSuffix
-				depart += this.BonSuffix[sizeM-1-i];
+				depart += this.BonSuffixe[sizeM-1-i];
 				drapeau = true;
 			}
 			

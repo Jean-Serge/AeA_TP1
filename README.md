@@ -36,7 +36,7 @@ Implémentation :
 ================
 
 Nous allons implémenter différents algorithme de recherche de motif 
-afin de constater leur efficacité à chacun.
+afin de constater leur efficacité.
 
 Les résultats d'une recherche de motif seront stockés dans une liste 
 d'entiers représentant les occurences de la chaîne.
@@ -56,22 +56,29 @@ L'implémentation de cet algorithme simple nous permet de disposer d'un programm
 fonctionnel assez rapidement. Cela nous permet également de vérifier efficacement
 le résultat d'algorithmes plus complexes par la suite.
 
-Implémentation 2:
+Implémentation 2: 
 -----------------
-Cette deuxième implémentation est réalisée en utilisant l'algorithme de Boyer-Moore.
-Cet algorithme se fait en deux étapes distinctes :
-- On traite le motif et on créé une matrice de bon-suffix. C'est elle qui va determiner
-le nombre de lettres à shifter.
-Pour remplir la table et pour un motif de taille n, on procède pour chaque indice de 0 à n-1 de telle façon :
-La case d'indice x contient l'intervalle entre le mot [x-1,n] et la première occurence
-y de ce même mot (on prend l'occurence la plus proche du mot). Si les caractères y+1 et x sont identiques alors on passe à l'occurence suivante...
+Cette implémentation basée sur l'algorithme de Boyer-Moore se fait en deux parties distinctes :
 
-- Ensuite on parcourt la séquence et commençant par l'indice n-1. On vérifie les correspondances de chaque caractère de droite à gauche.
-Dès que les caractères ne correspondent pas alors on shift la tête de lecture de la valeur contenue dans la matrice des bons suffixes à l'indice correspondant.
-On fait l'opération tant qu'on est pas à la fin de la séquence.
+-Tout d'abord, On fait appel à la fonction remplirBonSuffixe qui se charge de remplir la table des bons suffixes du motif passé en paramètre. C'est elle qui va determiner le nombre de lettres à shifter lors de la recherche de motif.
 
-Cet algorithme a une compléxité dans le pire des cas en O(n x m). En moyenne, c'est
-l'algorithme le plus rapide. On peut en effet shifter la tête de lecture assez rapidement dans de "bonnes conditions".
+Pour un motif m de taille n, on procède à chaque indice de 0 à n-1 de telle façon : La case d'indice x compris entre 0 et n-1 est égale à une valeur v. Concrètement, cela veut dire que nous avons trouvé le mot m[x-1,n-1] dans une séquence mais que m[x] n’apparaît pas dans la dite séquence à sa bonne place. Dans ce cas il faut se décaler de v indices sur la droite dans la séquence pour espérer trouver une occurrence du motif.
+
+L'algorithme fonctionne ainsi pour un motif m de longueur n passé en paramètre :
+
+Pour chaque sous-motif du mot (c'est à dire pour chaque m[i,n-1], pour i = n-1…0) :
+On doit chercher une occurrence du sous-motif mais qui ne doit pas être égal à m[i-1,n-1] à l'intérieur même du motif.
+Si on en trouve une alors on écrit dans bonsuffix[i-1] le nombre de déplacement pour se rendre à cette occurrence à partir de i.
+Sinon bonsuffix[i-1] vaut n moins la longueur de plus long bord du motif.
+
+-L'algorithme principal chercherMotif fait appel à remplirBonSuffixe dans un premier temps. Puis on commence à chercher les occurrences du motif m dans la séquence s.
+
+i vaut 0 au début.
+On compare s[x+i] et m[x], x compris entre 0 et n-1 (n étant la taille du motif).
+Dès que l'on a une différence de caractères pour un des x, alors i= bonsuffixe[x].
+Si l'on trouve une occurrence du motif dans la séquence à l'indice x alors on ajoute x dans la liste des occurrences et i=bonsuffixe[x].
+On recommence les comparaisons jusqu'à la fin de la séquence entrée en paramètre.
+A la fin on retourne cette liste.
 
 Etat du travail :
 =================
@@ -90,11 +97,7 @@ leurs occurences (voir notes)
 à true, les résultats d'un mot et de son réverse devront être fusionnés) 
 + Ecrire les résultats dans un fichier dotplot
 + Factoriser le code du Main (trop grand)
-
-TODO :
-------
 + Tester l'ensemble du programme
-+ Commencer l'implémentation d'un autre algorithme de recherche
 + Réduire la complexité des fonctions de la classe Recherche notamment
 la fusion des résultats selon les options.
 
