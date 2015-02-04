@@ -58,26 +58,24 @@ le résultat d'algorithmes plus complexes par la suite.
 
 Implémentation 2: 
 -----------------
-Cette implémentation basée sur l'algorithme de Boyer-Moore se fait en deux parties distinctes :
+Cette implémentation selon Boyer-Moore se fait en deux parties distinctes :
+Tout d'abord, On fait appel à la fonction remplirBonSuffixe qui se charge de remplir la table des bons suffixes du motif passé en paramètre. C'est elle qui va déterminer le nombre de lettres à shifter lors de la recherche de motif.
 
--Tout d'abord, On fait appel à la fonction remplirBonSuffixe qui se charge de remplir la table des bons suffixes du motif passé en paramètre. C'est elle qui va determiner le nombre de lettres à shifter lors de la recherche de motif.
-
-Pour un motif m de taille n, on procède à chaque indice de 0 à n-1 de telle façon : La case d'indice x compris entre 0 et n-1 est égale à une valeur v. Concrètement, cela veut dire que nous avons trouvé le mot m[x-1,n-1] dans une séquence mais que m[x] n’apparaît pas dans la dite séquence à sa bonne place. Dans ce cas il faut se décaler de v indices sur la droite dans la séquence pour espérer trouver une occurrence du motif.
-
-L'algorithme fonctionne ainsi pour un motif m de longueur n passé en paramètre :
-
-Pour chaque sous-motif du mot (c'est à dire pour chaque m[i,n-1], pour i = n-1…0) :
+Pour un motif m de taille n, on procède à chaque indice de 0 à n-1 de telle façon : La case d'indice x compris entre 0 et n-1 est égale à une valeur v. Concrètement, cela veut dire que nous avons trouvé le mot m[x-1,n-1] dans une séquence mais que m[x] n’apparaît pas dans la dite séquence à sa bonne place. Dans ce cas il faut se décaler de v indices sur la droite dans la séquence pour espérer trouver une occurrence du motif. 
+	
+L'algorithme fonctionne ainsi pour un motif m de longueur n passé en paramètre :
+Pour chaque sous-motif du mot (c'est à dire pour chaque m[i,n-1],  pour i = n-1…0) :
 On doit chercher une occurrence du sous-motif mais qui ne doit pas être égal à m[i-1,n-1] à l'intérieur même du motif.
-Si on en trouve une alors on écrit dans bonsuffix[i-1] le nombre de déplacement pour se rendre à cette occurrence à partir de i.
-Sinon bonsuffix[i-1] vaut n moins la longueur de plus long bord du motif.
+Si on en trouve une alors on écrit dans bonsuffixe[i-1] le nombre de déplacement pour se rendre à cette occurrence à partir de i.
+Sinon bonsuffixe[i-1] vaut n moins la longueur de plus long bord du motif.
 
--L'algorithme principal chercherMotif fait appel à remplirBonSuffixe dans un premier temps. Puis on commence à chercher les occurrences du motif m dans la séquence s.
-
+Puis l'algorithme principal chercherMotif fait appel à remplirBonSuffixe dans un premier temps. Puis on commence à chercher les occurrences du motif m dans la séquence s. 
 i vaut 0 au début.
-On compare s[x+i] et m[x], x compris entre 0 et n-1 (n étant la taille du motif).
-Dès que l'on a une différence de caractères pour un des x, alors i= bonsuffixe[x].
-Si l'on trouve une occurrence du motif dans la séquence à l'indice x alors on ajoute x dans la liste des occurrences et i=bonsuffixe[x].
+On compare s[x+i] et m[x], x décroissant de n-1 à 0 (n étant la taille du motif).
+Dès que l'on a une différence de caractères pour un des x, alors i = i + bonsuffixe[x].
+Si l'on trouve une occurrence du motif dans la séquence alors on ajoute son indice dans la liste des occurrences et i = i + bonsuffixe[i].
 On recommence les comparaisons jusqu'à la fin de la séquence entrée en paramètre.
+	
 A la fin on retourne cette liste.
 
 Etat du travail :
