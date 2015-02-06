@@ -63,4 +63,124 @@ public class Tools {
 			default: return "";
 		}
 	}
+	
+	/**
+	 * @return
+	 */
+	public static String[] genAppariements() {
+		
+		String[] retour = new String[2];
+		Random rand = new Random();
+		int i = rand.nextInt(4);
+		
+		switch (i) {
+		case 0:
+			retour[0] = "A";
+			retour[1] = "U";
+			break;
+		case 1:
+			retour[0] = "G";
+			if (rand.nextInt(2) == 0)
+				retour[1] = "C";
+			else
+				retour[1] = "U";
+			break;
+		case 2:
+			retour[0] = "U";
+			if (rand.nextInt(2) == 0)
+				retour[1] = "A";
+			else
+				retour[1] = "G";
+			break;
+		default:
+			retour[0] = "C";
+			retour[1] = "G";
+			break;
+		}
+		return retour;
+	}
+	
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
+	public static String nonAppariements(char c) {
+		int val  = new Random().nextInt(3);
+		
+		switch (c) {
+		case 'C':
+			switch(val) {
+			case 0:
+				return "C";
+			case 1:
+				return "A";
+			default:
+				return "U";
+			}
+		case 'A':
+			switch(val) {
+			case 0:
+				return "C";
+			case 1:
+				return "G";
+			default:
+				return "A";
+			}
+		case 'G':
+			switch(val) {
+			case 0:
+				return "A";
+			default:
+				return "G";
+			}
+		default:
+			switch(val) {
+			case 0:
+				return "U";
+			default:
+				return "C";
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static String[] nonAppariements() {
+		String[] retour = new String[2];
+		int val  = new Random().nextInt(3);
+		
+		switch (val) {
+		case 0:
+			retour[0] = "A";
+			retour[1] = nonAppariements('A');
+			break;
+		case 1:
+			retour[0] = "G";
+			retour[1] = nonAppariements('G');
+			break;
+		case 2:
+			retour[0] = "C";
+			retour[1] = nonAppariements('U');
+			break;
+		default:
+			retour[0] = "U";
+			retour[1] = nonAppariements('U');
+			break;
+		}
+		return retour;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static String genPreMicoARN() {
+		Random rand = new Random();
+		int taille = 70 + rand.nextInt(31);
+		//TODO
+		return null;
+	}
 }
