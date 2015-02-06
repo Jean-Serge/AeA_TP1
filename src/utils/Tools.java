@@ -180,7 +180,20 @@ public class Tools {
 	public static String genPreMicoARN() {
 		Random rand = new Random();
 		int taille = 70 + rand.nextInt(31);
-		//TODO
+		
 		return null;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private static String genMicroARN() {
+		Random rand = new Random();
+		String retour = "";
+		int taille = 20+ rand.nextInt(4);
+		for (int i=0; i<taille; i++)
+			retour +=  int2Nucleo(rand.nextInt(4));
+		return retour;
 	}
 }
