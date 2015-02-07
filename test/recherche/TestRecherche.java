@@ -9,7 +9,7 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
-import utils.Tools;
+import utils.Alea;
 import entite.Brin;
 
 public class TestRecherche {
@@ -82,7 +82,7 @@ public class TestRecherche {
 	public void testBoyerRechercheSimple() {
 		String motif;
 		for (int i = 0; i < 100000; i++) {
-			motif = Tools.motifAlea();
+			motif = Alea.motifAlea();
 			// On n'en teste qu'un, la recherche d'un motif ne prend pas en
 			// compte les options.
 			assertEquals("motif :" + motif, rboyer1.chercherMotif(motif),
