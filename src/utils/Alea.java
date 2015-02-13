@@ -2,7 +2,6 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Random;
 import java.util.TreeMap;
 
@@ -197,7 +196,7 @@ public class Alea {
 		int nb_points = nb;
 		int indice;
 		
-		while (nb_points !=0) {
+		for (int i=0; i< nb_points; i++) {
 			taille = rand.nextInt(3)+1;
 			indice = rand.nextInt(chaine.length());
 			if (nb_points - taille >= 0) {
@@ -216,12 +215,9 @@ public class Alea {
 	private static String genParenthesage() {
 		Random rand = new Random();
 		int longueur =rand.nextInt(31) + 70;
+		int nb_couple = rand.nextInt(longueur/2 - 24)+ 24;
 		int boucle_terminale = rand.nextInt(8)+1;
-		int nb_points = rand.nextInt(19)+1;
-		if (longueur%2 == 1) {
-			nb_points++;
-		}
-		int nb_couple = (longueur-nb_points-boucle_terminale)/2;
+		int nb_points = longueur - boucle_terminale - 2*nb_couple;
 						
 		String arn = "";
 		
