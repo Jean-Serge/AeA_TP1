@@ -54,8 +54,10 @@ public class RechercheBoyerMoore extends Recherche {
 		this.BonSuffixe[sizeM-1] = 1;
 		
 		int y = sizeM-2;
-		while (mot.charAt(y) == mot.charAt(sizeM-1))
+		while (y >= 0 && mot.charAt(y) == mot.charAt(sizeM-1)) {
 			this.BonSuffixe[sizeM-1] += 1;
+			y--;
+		}
 		
 		// On ajoute les valeurs situées entre l'indice 0 et sizeM-2 de droite à gauche :
 		for (int i = sizeM-2; i >= 0; i--) {
