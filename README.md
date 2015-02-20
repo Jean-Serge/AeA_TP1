@@ -98,6 +98,13 @@ leurs occurences (voir notes)
 + Tester l'ensemble du programme
 + Réduire la complexité des fonctions de la classe Recherche notamment
 la fusion des résultats selon les options.
++ Rendu :
+	- sources commentées
+	- documentation
+	- exécutable
+	- rapport (4 pages Max) : 
+		- présentation des algorithmes
+		- explication des résultats (dotplot + détection mirna)
 
 Notes :
 -------
