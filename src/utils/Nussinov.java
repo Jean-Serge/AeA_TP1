@@ -12,6 +12,7 @@ public class Nussinov {
 	
 	private int[][] tab;
 	
+	
 	/**
 	 * Constructeur Nussirov (algo de comptage de parenthèses)
 	 * @param seq la séquence à analyser
@@ -21,6 +22,9 @@ public class Nussinov {
 		this.tab = new int[seq.length()][seq.length()];
 	}
 	
+	/**
+	 * Execute l'algorithme de Nussinov (On cherche a maximiser le nombre d'appariements).
+	 */
 	public void executeAlgo() {
 		// Initialisation du tableau pour la programmation dynamique :
 		for (int i=0; i< this.sequence.length()-1; i++) {
@@ -58,12 +62,23 @@ public class Nussinov {
 		return max;
 	}
 
+	/**
+	 * Retourne la valeur maximale entre quatre valeurs.
+	 * @param cas1
+	 * @param cas2
+	 * @param cas3
+	 * @param cas4
+	 * @return la plus grande valeur des quatres.
+	 */
 	private int max(int cas1, int cas2, int cas3, int cas4) {
 		int max1 = Math.max(cas1,cas2);
 		int max2 = Math.max(cas3,cas4);
 		return Math.max(max1,max2);
 	}
 
+	/**
+	 * Affiche la matrice de programmation dynamique associée à l'algorithme.
+	 */
 	public void printTab() {
 		for (int i=0; i< this.tab.length; i++) {
 			for (int j=0; j< this.tab.length; j++)
@@ -99,6 +114,12 @@ public class Nussinov {
 	
 	public int[][] getResults() {
 		return this.tab;
+	}
+	
+	public static void main(String[] argv) {
+		Nussinov nus = new Nussinov("TGCTTCCGGCCTGTTCCCTGAGACCTCAAGTGTGAGTGTACTATTGATGCTTCACACCTGGGCTCTCCGGGTACCAGGACGGTTTGAGCA");
+		nus.executeAlgo();
+		nus.printTab();
 	}
 	
 }
