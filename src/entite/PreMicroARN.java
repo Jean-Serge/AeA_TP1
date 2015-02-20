@@ -86,8 +86,10 @@ public class PreMicroARN extends Brin{
 				nb_parent--;
 			}
 		}
+		if (j_dep - i_dep < 8)
+			return false;
 		
-		return true;
+		return drapeau;
 		
 	}
 	
