@@ -98,6 +98,11 @@ leurs occurences (voir notes)
 + Tester l'ensemble du programme
 + Réduire la complexité des fonctions de la classe Recherche notamment
 la fusion des résultats selon les options.
+
+TODO :
+-----------------
++ Faire un algo de recherche de pré-micro-ARN dans une séquence génomique (fin Tache 2)
++ Faire la Tache 3 (algo de detection des erreurs vu en cours pour la comparaison de l'ARN messager et des miARN renvoyer par la recherche de la Tache 2)
 + Rendu :
 	- sources commentées
 	- documentation
