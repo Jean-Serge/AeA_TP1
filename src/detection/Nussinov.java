@@ -1,7 +1,8 @@
-package utils;
+package detection;
 
 /**
  * Classe effectuant l'algorithme de Nussinov.
+ * Au final cette classe n'est pas utilisée dans ce projet...
  * @author thibaud
  * @author monbailly
  *
@@ -43,7 +44,7 @@ public class Nussinov {
 		for (int sup=1; sup < this.tab.length; sup++) {
 			for (int i=0; i<this.tab.length-sup; i++) {
 				int j = i+sup;
-				case1 = this.tab[i+1][j-1] + this.w(this.sequence.charAt(i), this.sequence.charAt(j));
+				case1 = this.tab[i+1][j-1] + w(this.sequence.charAt(i), this.sequence.charAt(j));
 				case2 = this.tab[i+1][j];
 				case3 = this.tab[i][j-1];
 				case4 = this.case4(i,j);
@@ -82,12 +83,12 @@ public class Nussinov {
 	public void printTab() {
 		for (int i=0; i< this.tab.length; i++) {
 			for (int j=0; j< this.tab.length; j++)
-				System.out.print(this.tab[i][j]);
+				System.out.print(this.tab[i][j]+"  ");
 			System.out.println();
 		}
 	}
 	
-	public int w(char c1, char c2) {
+	public static int w(char c1, char c2) {
 		switch (c1) {
 		case 'A':
 			if (c2 == 'T')
@@ -115,11 +116,5 @@ public class Nussinov {
 	public int[][] getResults() {
 		return this.tab;
 	}
-	
-	public static void main(String[] argv) {
-		Nussinov nus = new Nussinov("TGCTTCCGGCCTGTTCCCTGAGACCTCAAGTGTGAGTGTACTATTGATGCTTCACACCTGGGCTCTCCGGGTACCAGGACGGTTTGAGCA");
-		nus.executeAlgo();
-		nus.printTab();
-	}
-	
+		
 }
