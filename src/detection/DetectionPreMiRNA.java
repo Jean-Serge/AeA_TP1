@@ -51,17 +51,17 @@ public class DetectionPreMiRNA {
 		// On vérifie que la boucle terminale est inférieure à 9 :
 		if (lon-1-larg > 8)
 			return null;
-		
+
 		// Parcours du nombre d'appariements pour savoir si la chaine contient un
 		// Pré-Micro-ARN :
 		int[] coord = new int[2];
 		
-		for (int i=ind_fin-ind_dep; i >= lon; i--) {
-			for (int j=0; j <= larg; j++) {
+		for (int j=99; j > 0; j--) {
+			for (int i=0; i < 100; i++) {
 				// Il faut avoir 24 appariements au moins
-				if (results[j][i] >= 24) {
-					coord[0] = j;
-					coord[1] = i;
+				if (results[i][j] >= 24) {
+					coord[0] = this.debut+i;
+					coord[1] = this.debut+i+j;
 					return coord;
 				}
 			}
@@ -78,12 +78,11 @@ public class DetectionPreMiRNA {
 			
 			// On regarde entre les positions debut et fin si on a un préMiRNA
 			unresult = this.contientPreMiRNA(this.debut, this.fin);
-	
 			if (unresult != null) {
 				// si on a un resultat alors on l'ajoute dans la liste
 				list.add(unresult);
 				// On met a jour les indices :
-				this.debut += unresult[1];
+				this.debut = unresult[1]+1;
 				this.fin = this.debut + 99;
 			}
 			else {
