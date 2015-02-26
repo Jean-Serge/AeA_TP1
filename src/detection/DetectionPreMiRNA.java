@@ -56,8 +56,8 @@ public class DetectionPreMiRNA {
 		// Pré-Micro-ARN :
 		int[] coord = new int[2];
 		
-			for (int i=0; i < 100; i++) {
-				for (int j=99; j > 0; j--) {
+			for (int i=0; i < ind_fin-ind_dep+1; i++) {
+				for (int j=ind_fin-ind_dep; j > 0; j--) {
 				// Il faut avoir 24 appariements au moins
 				if (results[i][j] >= 24) {
 					coord[0] = this.debut+i;
@@ -85,11 +85,11 @@ public class DetectionPreMiRNA {
 				this.fin = this.debut + 99;
 			}
 			else {
-				// sinon on zappe la sequence ne contenant pas de préMiRNA :
-				this.debut += 100;
-				this.fin += 100;
+				// sinon on passe au 100 caractères suivants :
+				this.debut++;
+				this.fin++;
 			}
-			
+
 			// On prend garde de ne pas dépasser le nombre de caractères de la séquence
 			if (this.fin >= this.sequence.length())
 				this.fin = this.sequence.length()-1;
