@@ -56,8 +56,8 @@ public class DetectionPreMiRNA {
 		// Pré-Micro-ARN :
 		int[] coord = new int[2];
 		
-		for (int j=99; j > 0; j--) {
 			for (int i=0; i < 100; i++) {
+				for (int j=99; j > 0; j--) {
 				// Il faut avoir 24 appariements au moins
 				if (results[i][j] >= 24) {
 					coord[0] = this.debut+i;
@@ -75,7 +75,6 @@ public class DetectionPreMiRNA {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		
 		while (this.fin-this.debut > 68) {
-			
 			// On regarde entre les positions debut et fin si on a un préMiRNA
 			unresult = this.contientPreMiRNA(this.debut, this.fin);
 			if (unresult != null) {
