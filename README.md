@@ -100,10 +100,10 @@ leurs occurences (voir notes)
 la fusion des résultats selon les options
 + Faire un générateur de pré-micro-ARN [ajout TP2]
 + Faire un algo de recherche de pré-micro-ARN dans une séquence génomique [ajout TP2]
++ Faire la Tache 3 [ajout TP2]
 
 TODO :
 -----------------
-+ Faire la Tache 3 (algo de detection des erreurs vu en cours pour la comparaison de l'ARN messager et des miARN renvoyer par la recherche de la Tache 2)
 + Rendu :
 	- sources commentées (OK)
 	- documentation (OK, plus qu'à la générer)
