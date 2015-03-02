@@ -42,6 +42,7 @@ public class DetectionPreMiRNA {
 		nuss.executeAlgo();
 		
 		int[][] results = nuss.getResults();
+		
 		int larg = ind_fin-ind_dep;
 		int lon = 0;
 			
@@ -54,16 +55,17 @@ public class DetectionPreMiRNA {
 		// On vérifie que la boucle terminale est inférieure à 9 :
 		if (lon-1-larg > 8)
 			return null;
-
+		
+		
 		// Parcours du nombre d'appariements pour savoir si la chaine contient un
-		// Pré-Micro-ARN (on prend le plus petit que l'on trouve):
+		// Pré-Micro-ARN (on prend le plus grand que l'on trouve):
 		int[] coord = new int[2];
 		
 		
 		for (int i=0; i < ind_fin-ind_dep+1; i++) {
-			for (int j=0; j < ind_fin-ind_dep+1; j++) {
+			for (int j=ind_fin-ind_dep; j >= 0; j--) {
 			// Il faut avoir 24 appariements au moins
-				if (results[i][j] >= 24) {
+				if (results[i][j] >= 24 && j-i >= 69  && this.debut+i+j < this.sequence.length() && nuss.getAppariements(i, j) > 2) {
 					coord[0] = this.debut+i;
 					coord[1] = this.debut+i+j;
 					return coord;
@@ -88,7 +90,6 @@ public class DetectionPreMiRNA {
 			// On passe au 100 caractères suivants (on suppose que les pré-MiRNA peuvent :
 			this.debut++;
 			this.fin++;
-
 			// On prend garde de ne pas dépasser le nombre de caractères de la séquence
 			if (this.fin >= this.sequence.length())
 				this.fin = this.sequence.length()-1;
@@ -104,6 +105,7 @@ public class DetectionPreMiRNA {
 	 * @param argv l'ARN messager à hybrider sur l'un des préMiRNA (optionnel)
 	 */
 	public static void main(String[] argv) {
+			
 		// On charge le chromosome 13 :
 		Brin br = new Brin("donnees/chromosome.fasta");
 		// On créé une nouvelle detection de pré-MiRNA :
@@ -115,8 +117,7 @@ public class DetectionPreMiRNA {
 		System.out.println(size+" préMiRNA(s).");
 		
 		// l'utilisateur souhaite connaitre le Pré-Micro-ARN ayant un micro-ARN 
-		// pouvant s'hybrider avec un ARN-messager passé en argument :
-		
+		// pouvant s'hybrider avec un ARN-messager passé en argument :		
 		if (argv.length == 1) {
 			
 			System.out.println();
@@ -129,7 +130,6 @@ public class DetectionPreMiRNA {
 			// On va utiliser Boyer-Moore (TP1) pour retrouver l'indice de ce motif dans tous les pré-MiRNA
 			RechercheBoyerMoore boyer;
 			List<Integer> res;
-			String arn_max = "";
 			
 			for (int i=0; i < size; i++) {
 				// On parcours toute la liste en utilisant Boyer-Moore
@@ -140,20 +140,13 @@ public class DetectionPreMiRNA {
 					// Pour chaque resultat on regarde si l'indice est compris en 10 (9) et 15 (14).
 					if (x > 9 && x < 15) {
 						String hybride = br.getSequence().substring(result.get(i)[0], result.get(i)[1]+1);
-						// On va prendre le pré-MiRNA de longueur maximale (les autres étant "contenus" dans celui-ci)
-						if (hybride.length() > arn_max.length()) {
-							arn_max = hybride;
-						}
+						System.out.println("le messager s'hybride avec le micro-ARN du pré-micro-ARN suivant :");
+						System.out.println(hybride);
 					}
 				}
 				
 			}
-			if (!arn_max.equals("")) {
-				System.out.println("le messager s'hybride avec le micro-ARN du pré-micro-ARN suivant :");
-				System.out.println(arn_max);
-			}
 		}
-		
 	}
 	
 }

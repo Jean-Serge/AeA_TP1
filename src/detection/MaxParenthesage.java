@@ -242,5 +242,10 @@ public class MaxParenthesage {
 	public int[][] getResults() {
 		return this.tab;
 	}
+	
+	
+	public int getAppariements(int i, int j) {
+		return this.tab_parents[i][j];
+	}
 		
 }
