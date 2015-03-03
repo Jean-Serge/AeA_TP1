@@ -181,7 +181,7 @@ public class MaxParenthesage {
 
 		for (int i=0; i< this.tab.length; i++) {
 			for (int j=0; j< this.tab.length; j++)
-				System.out.print(this.tab[i][j]+"  ");
+				System.out.print(this.tab[i][j]+"\t");
 			System.out.println();
 		}
 		
@@ -189,7 +189,7 @@ public class MaxParenthesage {
 
 		for (int i=0; i< this.tab.length; i++) {
 			for (int j=0; j< this.tab.length; j++)
-				System.out.print(this.tab_parents[i][j]+"  ");
+				System.out.print(this.tab_parents[i][j]+"\t");
 			System.out.println();
 		}
 		
@@ -197,7 +197,7 @@ public class MaxParenthesage {
 
 		for (int i=0; i< this.tab.length; i++) {
 			for (int j=0; j< this.tab.length; j++)
-				System.out.print(this.tab_points[i][j]+"  ");
+				System.out.print(this.tab_points[i][j]+"\t");
 			System.out.println();
 		}
 	}
@@ -243,9 +243,27 @@ public class MaxParenthesage {
 		return this.tab;
 	}
 	
-	
+	/**
+	 * Retourne le nombre d'appariements successifs contenu dans le tableau
+	 * des appariements aux coordonnées i,j
+	 * @param i numéro de ligne
+	 * @param j numéro de colonne
+	 * @return le nombre d'appariements successifs à la case i,j
+	 */
 	public int getAppariements(int i, int j) {
 		return this.tab_parents[i][j];
+	}
+	
+	
+	/**
+	 * Retourne le nombre de nucléotides successifs ignoré contenu dans le tableau
+	 * des "points" aux coordonnées i,j
+	 * @param i numéro de ligne
+	 * @param j numéro de colonne
+	 * @return le nombre de nucléotides successivement ignorées à la case i,j
+	 */
+	public int getIgnore(int i, int j) {
+		return this.tab_points[i][j];
 	}
 		
 }

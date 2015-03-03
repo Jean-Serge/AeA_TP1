@@ -40,22 +40,7 @@ public class DetectionPreMiRNA {
 		
 		MaxParenthesage nuss = new MaxParenthesage(this.sequence.substring(ind_dep, ind_fin+1));
 		nuss.executeAlgo();
-		
-		int[][] results = nuss.getResults();
-		
-		int larg = ind_fin-ind_dep;
-		int lon = 0;
-			
-		// Parcours du tableau de resultat afin de calculer la longueur de la boucle terminale :
-		while (larg > 0 && results[larg][ind_fin-ind_dep] == 0)
-			larg--;
-		while (lon < (ind_fin-ind_dep) && results[larg][lon] == 0)
-			lon++;
-				
-		// On vérifie que la boucle terminale est inférieure à 9 :
-		if (lon-1-larg > 8)
-			return null;
-		
+		int[][] results = nuss.getResults();	
 		
 		// Parcours du nombre d'appariements pour savoir si la chaine contient un
 		// Pré-Micro-ARN (on prend le plus grand que l'on trouve):
@@ -68,7 +53,8 @@ public class DetectionPreMiRNA {
 				if (results[i][j] >= 24 && j-i >= 69  && this.debut+i+j < this.sequence.length() && nuss.getAppariements(i, j) > 2) {
 					coord[0] = this.debut+i;
 					coord[1] = this.debut+i+j;
-					return coord;
+					if (VerifieBoucleTerminale(i,j,nuss))
+						return coord;
 				}
 			}
 		}
@@ -76,6 +62,49 @@ public class DetectionPreMiRNA {
 		return null;
 	}
 	
+	
+	/**
+	 * Permet de vérifier la longueur de la boucle terminale de la séquence génomique
+	 * en effectuant un BackTrace depuis les coordonnees i,j de la table de programmation dynamique.
+	 * @param i
+	 * @param j
+	 * @param maxp le resultat de l'algorithme de maximisation d'appariements
+	 * @return
+	 */
+	private boolean VerifieBoucleTerminale(int i, int j, MaxParenthesage nuss) {
+		int[][] tabAppariements = nuss.getResults();
+		int x = i;
+		int y = j;
+		// On déroule la diagonale jusqu'au dernier appariements, cela nous donne les indices de la boucle terminale
+		while (tabAppariements[x][y] != 0 && x < tabAppariements.length-1) {
+			int nb_parents = nuss.getAppariements(x, y);
+			int nb_points = nuss.getIgnore(x, y);
+
+			if (nb_parents != 0 && nb_points == 0) {
+				x += nb_parents;
+				y -= nb_parents;
+			}
+			else {
+				int nb_points_g = nuss.getIgnore(x, y-1);
+				
+				if (nb_points-1 == nb_points_g) {
+						y -= 1;
+				}
+				else {
+						x += 1;
+				}
+			}
+
+		}
+		// Quand on a récuperé ces indices il est facile de savoir si la boucle terminale fait une bonne longueur
+		return (y-x+1 <= 8);
+	}
+
+
+	/**
+	 * Retourne tout les pré-Micro-ARN d'une séquence génomique.
+	 * @return une liste avec les coordonnées des pré-Micro-ARN
+	 */
 	public ArrayList<int[]> getAllPreMiRNA() {
 		int[] unresult;
 		ArrayList<int[]> list = new ArrayList<int[]>();
@@ -105,12 +134,11 @@ public class DetectionPreMiRNA {
 	 * @param argv l'ARN messager à hybrider sur l'un des préMiRNA (optionnel)
 	 */
 	public static void main(String[] argv) {
-			
 		// On charge le chromosome 13 :
 		Brin br = new Brin("donnees/chromosome.fasta");
 		// On créé une nouvelle detection de pré-MiRNA :
 		DetectionPreMiRNA det = new DetectionPreMiRNA(br);
-		
+	
 		System.out.println("Le chromosome 13 contient :");
 		ArrayList<int[]> result = det.getAllPreMiRNA();
 		int size = result.size();
