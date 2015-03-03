@@ -4,6 +4,9 @@
 ### .fasta, il est paramétrable avec la taille des motifs à rechercher ainsi
 ### que les éventuelles options de la recherche.
 
+###
+### Indique à l'utilisateur comment utiliser cette commande.
+###
 usage()
 {
     echo
@@ -21,36 +24,40 @@ usage()
 }
 
 
+# Compilation
 if [ ! -d bin ];
 then
-	mkdir bin
+    mkdir bin
 fi
-
 javac -d bin src/*/*.java
 
 
+# Lecture des options indiquées
 option=''
 for i in "$@" 
 do
-	option=$option" "$i
+    option=$option" "$i
 done
 
+# Exécution
 java -cp bin main.Main $option
 
-
 if expr $? = 0 >/dev/null 
-then 
-	if [ -f 'resultats.plot' ];
-	then
-	    gnuplot resultats.plot 2>/dev/null
-	fi
+then
+    
+    if [ -f 'resultats.plot' ];
+    then
+	gnuplot resultats.plot 2>/dev/null
+    fi
 
-	if expr $? != 0 >/dev/null 
-	then 
-	    echo "gnuplot doit être installé pour pouvoir générer le resultat."
-	else
-	    echo "Pour voir les résultats, visionnez le fichier resultats."
-	fi
+    # Vérifie que gnuplot est installé
+    if expr $? != 0 >/dev/null 
+    then 
+	echo "gnuplot doit être installé pour pouvoir générer le resultat."
+    else
+	echo "Pour voir les résultats, visionnez le fichier resultats."
+    fi
 else
+    # Si problème avec le programme Java
     usage
 fi
