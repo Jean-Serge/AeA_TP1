@@ -21,6 +21,8 @@ usage()
     echo
     echo "Ce programme compilera les sources et exécutera l'application Java avec les paramètres spécifiés."
     echo "Cette application créera ensuite un fichier .plot et .txt qui serviront à générer le plot final."
+    echo
+    echo "Vous pouvvez aussi lui demander d'effectuer la recherche avec l'algorithme naïf grâce à l'option --naif"
 }
 
 
